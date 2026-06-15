@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResearchCard from '../components/ResearchCard.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('research');
+const sorted = entries.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="Research — Philip Smith" description="Research papers, articles, and academic writing.">
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">Research</h1>
+    <p class="text-gray-600 dark:text-gray-400 mb-10">
+      Papers, articles, and academic work.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      {sorted.map(entry => <ResearchCard entry={entry} />)}
+    </div>
+  </div>
+</BaseLayout>

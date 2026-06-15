@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="Blog — Philip Smith" description="Explorations, experiments, and thoughts on software engineering.">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">Blog</h1>
+    <p class="text-gray-600 dark:text-gray-400 mb-10">
+      One-off explorations, deep dives, and things I found interesting enough to write about.
+    </p>
+
+    <div>
+      {sorted.map(post => <BlogCard post={post} />)}
+    </div>
+  </div>
+</BaseLayout>

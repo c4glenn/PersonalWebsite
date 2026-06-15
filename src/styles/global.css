@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --color-accent: oklch(54.6% 0.245 293.1);       /* violet-600 */
+  --color-accent-light: oklch(69.8% 0.195 302.4); /* violet-400 */
+  --color-accent-muted: oklch(91.2% 0.063 302.4); /* violet-100 */
+}
+
+/* Smooth theme transitions */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

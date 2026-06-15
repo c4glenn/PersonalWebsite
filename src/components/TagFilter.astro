@@ -1,0 +1,55 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2 mb-8" id="tag-filter-bar">
+  <button
+    class="tag-btn active px-3 py-1.5 rounded-full text-sm font-medium transition-all border border-transparent bg-accent text-white dark:bg-accent-light dark:text-gray-950"
+    data-tag="all"
+  >
+    All
+  </button>
+  {tags.map(tag => (
+    <button
+      class="tag-btn px-3 py-1.5 rounded-full text-sm font-medium transition-all border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-accent dark:hover:border-accent-light hover:text-accent dark:hover:text-accent-light"
+      data-tag={tag}
+    >
+      {tag}
+    </button>
+  ))}
+</div>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+  const cards   = document.querySelectorAll<HTMLElement>('[data-tags]');
+
+  const activeClass    = ['bg-accent', 'text-white', 'dark:bg-accent-light', 'dark:text-gray-950', 'border-transparent'];
+  const inactiveClass  = ['border-gray-200', 'dark:border-gray-700', 'text-gray-600', 'dark:text-gray-400'];
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.tag ?? 'all';
+
+      buttons.forEach(b => {
+        const isActive = b === btn;
+        b.classList.toggle('active', isActive);
+        if (isActive) {
+          b.classList.add(...activeClass);
+          b.classList.remove(...inactiveClass);
+        } else {
+          b.classList.remove(...activeClass);
+          b.classList.add(...inactiveClass);
+        }
+      });
+
+      cards.forEach(card => {
+        const tags: string[] = JSON.parse(card.dataset.tags ?? '[]');
+        card.style.display = selected === 'all' || tags.includes(selected) ? '' : 'none';
+      });
+    });
+  });
+</script>

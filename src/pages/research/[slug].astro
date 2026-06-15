@@ -1,0 +1,41 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('research');
+  return entries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<PostLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  date={entry.data.date}
+  tags={entry.data.tags}
+  authors={entry.data.authors}
+  venue={entry.data.venue}
+>
+  {entry.data.paperFile && (
+    <div class="not-prose mb-8 p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 flex items-center gap-3">
+      <svg class="w-5 h-5 text-accent dark:text-accent-light shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+      </svg>
+      <a
+        href={`/papers/${entry.data.paperFile}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm font-medium text-accent dark:text-accent-light hover:underline"
+      >
+        Download paper (PDF)
+      </a>
+    </div>
+  )}
+  <Content />
+</PostLayout>

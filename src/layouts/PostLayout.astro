@@ -1,0 +1,47 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { formatFullDate } from '../utils/dates';
+
+interface Props {
+  title: string;
+  description?: string;
+  date?: Date;
+  tags?: string[];
+  authors?: string[];
+  venue?: string;
+}
+
+const { title, description, date, tags = [], authors = [], venue } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="max-w-3xl mx-auto px-6 py-16">
+    <header class="mb-10">
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map(tag => (
+          <span class="text-xs px-2.5 py-1 rounded-full bg-accent-muted dark:bg-violet-900/40 text-accent dark:text-accent-light font-medium">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
+        {title}
+      </h1>
+      {authors.length > 0 && (
+        <p class="text-gray-600 dark:text-gray-400 mb-2">{authors.join(', ')}</p>
+      )}
+      {venue && (
+        <p class="text-accent dark:text-accent-light font-medium mb-2">{venue}</p>
+      )}
+      {date && (
+        <time class="text-sm text-gray-500 dark:text-gray-500" datetime={date.toISOString()}>
+          {formatFullDate(date)}
+        </time>
+      )}
+    </header>
+
+    <div class="prose prose-gray dark:prose-invert max-w-none prose-a:text-accent dark:prose-a:text-accent-light prose-headings:font-semibold">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
