@@ -10,16 +10,22 @@ const featured = allProjects
   .slice(0, 3);
 ---
 
-<BaseLayout title="Philip Smith" description="Personal website of Philip Smith — software engineer, researcher, builder.">
+<BaseLayout title="Philip Smith" description="Personal website of Philip Smith — Robotics Engineering MS student at WPI researching multi-robot systems and swarm robotics.">
   <!-- Hero -->
   <section class="max-w-5xl mx-auto px-6 pt-20 pb-16">
     <div class="max-w-2xl">
       <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
         Hi, I'm Philip.
       </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+        Master's student in Robotics Engineering at Worcester Polytechnic Institute. I research
+        multi-robot coordination, task allocation, and human–swarm interaction — working toward
+        scalable and reliable swarm robotics.
+      </p>
       <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-        I'm a software engineer and researcher interested in systems, machine learning, and building things that matter.
-        I write about what I explore, share what I build, and occasionally publish research.
+        My background spans coordination algorithms, ROS2/Gazebo simulation, machine vision,
+        and embedded systems. I've presented at ROSCon and multiple research symposia, and
+        interned across robotics startups and academic labs.
       </p>
       <div class="flex flex-wrap gap-3">
         <a
@@ -29,10 +35,16 @@ const featured = allProjects
           View Projects
         </a>
         <a
+          href="/research"
+          class="px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium text-sm hover:border-accent dark:hover:border-accent-light hover:text-accent dark:hover:text-accent-light transition-colors"
+        >
+          Research
+        </a>
+        <a
           href="/blog"
           class="px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium text-sm hover:border-accent dark:hover:border-accent-light hover:text-accent dark:hover:text-accent-light transition-colors"
         >
-          Read Blog
+          Blog
         </a>
       </div>
     </div>
