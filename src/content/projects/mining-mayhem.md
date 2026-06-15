@@ -7,7 +7,7 @@ tags: ["Competition Design", "Robotics", "Event Organization", "IEEE", "Hardware
 liveUrl: "https://youtu.be/NpTU2VAOOro?si=V9pXC8679CSj0BVQ"
 featured: true
 relatedResearch: []
-relatedExperience: []
+relatedExperience: ["gold-rush-robotics"]
 ---
 
 <div style="padding:56.25% 0 0 0;position:relative;margin-bottom:2rem;">
