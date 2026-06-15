@@ -8,7 +8,7 @@ description: "Led UNC Charlotte's IEEE Robotics and Automation Society student b
 startDate: "2022-06"
 endDate: "2025-06"
 tags: ["Robotics", "Leadership", "PCB Design", "ROS2", "Embedded Systems", "IEEE", "Team Management"]
-relatedResearch: []
+relatedResearch: ["roscon-2024-micro-ros-can-fd"]
 relatedProjects: ["grr-2023", "grr-2024", "mining-mayhem"]
 ---
 
@@ -17,10 +17,10 @@ Three years with Gold Rush Robotics, UNC Charlotte's IEEE Robotics and Automatio
 ## Timeline
 
 **2022–2023 — Core Member**
-Joined as a guiding member in the club's early development. Contributed to robot design and build for the IEEE Southeastcon 2023 Hardware Competition in Orlando, FL.
+Joined as a guiding member in the club's early development. Championed the team's transition from Arduino to Raspberry Pi. Contributed to robot design and build for the IEEE Southeastcon 2023 Hardware Competition in Orlando, FL.
 
 **2023–2024 — Vice President**
-Took on the VP role, leading the Electrical subteam. Designed a custom PCB in KiCAD that introduced CAN-FD communication between a Teensy 4.0 and Nvidia Jetson — the architecture that became the subject of a ROSCon 2024 presentation. Competed at IEEE Southeastcon 2024 in Atlanta, GA.
+Took on the VP role, leading the Software subteam.  Championed the team's transition to ROS with a custom PCB for improved data and power management. Competed at IEEE Southeastcon 2024 in Atlanta, GA.
 
 **2024–2025 — President**
-Led the full organization: strategy, recruitment, member mentorship, and competition logistics. Championed the team's transition from Arduino to Raspberry Pi and ultimately to ROS with a custom PCB for improved data and power management. Mentored 10+ members across electrical and software subteams.
+Led the full organization: strategy, recruitment, member mentorship, and competition logistics.  Mentored 20+ members across electrical and software subteams.
