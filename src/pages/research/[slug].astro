@@ -1,6 +1,7 @@
 ---
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
+import { formatDateRange } from '../../utils/dates';
 
 export async function getStaticPaths() {
   const entries = await getCollection('research');
@@ -12,6 +13,10 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const relatedProjectEntries = (
+  await Promise.all(entry.data.relatedProjects.map((id: string) => getEntry('projects', id)))
+).filter(Boolean);
 ---
 
 <PostLayout
@@ -37,5 +42,31 @@ const { Content } = await render(entry);
       </a>
     </div>
   )}
+
   <Content />
+
+  {relatedProjectEntries.length > 0 && (
+    <aside class="not-prose mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">
+        Related Projects
+      </h2>
+      <ul class="space-y-3">
+        {relatedProjectEntries.map(p => p && (
+          <li>
+            <a
+              href={`/projects/${p.id}`}
+              class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors"
+            >
+              <span class="font-medium text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors text-sm">
+                {p.data.title}
+              </span>
+              <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
+                {formatDateRange(p.data.startDate, p.data.endDate)}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
 </PostLayout>

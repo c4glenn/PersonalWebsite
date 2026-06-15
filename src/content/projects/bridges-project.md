@@ -7,6 +7,7 @@ company: "UNC Charlotte"
 role: "Undergraduate Researcher"
 tags: ["Java", "Education Technology", "Game Development", "Open Source"]
 featured: false
+relatedResearch: ["audio-themed-assignments"]
 ---
 
 Multi-year involvement with the BRIDGES (Bridging Real-world Infrastructure Designed to Goal-orient and Engage Students) project.

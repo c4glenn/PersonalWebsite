@@ -15,6 +15,8 @@ const projects = defineCollection({
     company: z.string().optional(),
     role: z.string().optional(),
     featured: z.boolean().default(false),
+    relatedProjects: z.array(z.string()).default([]),
+    relatedResearch: z.array(z.string()).default([]),
   }),
 });
 
@@ -30,6 +32,7 @@ const research = defineCollection({
     doiUrl: z.string().url().optional(),
     venue: z.string().optional(),
     authors: z.array(z.string()).default([]),
+    relatedProjects: z.array(z.string()).default([]),
   }),
 });
 

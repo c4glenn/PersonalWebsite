@@ -6,6 +6,7 @@ authors: ["Matthew McQuaigue", "Mack Larson", "Philip Smith", "Sydney Melech", "
 venue: "Journal of Computing Sciences in Colleges, Volume 39, Issue 8"
 tags: ["CS Education", "Pedagogy", "Audio", "Java"]
 doiUrl: "https://par.nsf.gov/servlets/purl/10572203"
+relatedProjects: ["bridges-project", "uncc-ta"]
 ---
 
 Audio-themed programming assignments were developed and deployed in introductory CS courses to increase engagement. The paper analyzes student performance metrics to evaluate the impact of audio-driven lessons on learning outcomes.
