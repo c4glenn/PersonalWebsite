@@ -9,6 +9,16 @@ tags: ["Micro-ROS", "CAN-FD", "Embedded Systems", "ROS2", "Teensy", "Nvidia Jets
 
 Presented at ROSCon 2024 in Odense, Denmark. This work demonstrates CAN-FD as a practical transport layer for Micro-ROS, bridging a Teensy 4.0 microcontroller with an Nvidia Jetson over a CAN-FD bus.
 
+<div style="padding:56.25% 0 0 0;position:relative;margin-bottom:2rem;">
+  <iframe
+    src="https://player.vimeo.com/video/1026031720"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
 ## Overview
 
 CAN-FD (Controller Area Network with Flexible Data-rate) is widely used in automotive and industrial systems for its reliability and deterministic timing. This presentation shows how it can serve as a high-throughput, low-latency transport for Micro-ROS, making it a strong alternative to serial UART for robotics applications that demand real-time communication between embedded controllers and a Linux host.
