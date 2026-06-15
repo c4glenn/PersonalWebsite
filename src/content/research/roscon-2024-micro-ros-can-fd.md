@@ -5,6 +5,8 @@ date: "2024-10-01"
 authors: ["Philip Smith"]
 venue: "ROSCon 2024, Odense, Denmark"
 tags: ["Micro-ROS", "CAN-FD", "Embedded Systems", "ROS2", "Teensy", "Nvidia Jetson"]
+relatedProjects: ["grr-2024"]
+relatedExperience: []
 ---
 
 Presented at ROSCon 2024 in Odense, Denmark. This work demonstrates CAN-FD as a practical transport layer for Micro-ROS, bridging a Teensy 4.0 microcontroller with an Nvidia Jetson over a CAN-FD bus.
