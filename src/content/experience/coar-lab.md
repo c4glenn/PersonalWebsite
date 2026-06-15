@@ -1,12 +1,15 @@
 ---
-title: "Undergraduate Researcher — UNC Charlotte COAR Lab"
-description: "Developed a multi-use Gazebo + ROS2 simulation framework to evaluate multi-robot coordination algorithms and track performance metrics. Presented at UNC Charlotte OUR Symposium."
+title: "Undergraduate Researcher"
+company: "UNC Charlotte COAR Lab"
+role: "Undergraduate Researcher"
+location: "Charlotte, NC"
+type: "research"
+description: "Developed a multi-use Gazebo + ROS2 simulation framework to evaluate multi-robot coordination algorithms. Presented at UNC Charlotte OUR Symposium."
 startDate: "2024-01"
 endDate: "2024-05"
-company: "UNC Charlotte"
-role: "Undergraduate Researcher"
 tags: ["ROS2", "Gazebo", "Multi-Robot Systems", "Simulation", "Python", "C++"]
-featured: false
+relatedResearch: []
+relatedProjects: []
 ---
 
 Research in the COAR Lab at UNC Charlotte focused on reproducible multi-robot coordination experiments.

@@ -1,60 +1,66 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, getEntry, render } from 'astro:content';
-import { formatDateRange } from '../../utils/dates';
+import { formatDateRange, formatFullDate } from '../../utils/dates';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map(project => ({
-    params: { slug: project.id },
-    props: { project },
+  const entries = await getCollection('experience');
+  return entries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
   }));
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
-const { title, description, startDate, endDate, tags, repoUrl, liveUrl, featured, relatedResearch, relatedExperience } = project.data;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, company, role, location, type, description, startDate, endDate, tags, repoUrl, liveUrl, relatedResearch, relatedProjects } = entry.data;
 
 const relatedResearchEntries = (
   await Promise.all(relatedResearch.map((id: string) => getEntry('research', id)))
 ).filter(Boolean);
 
-const relatedExperienceEntries = (
-  await Promise.all(relatedExperience.map((id: string) => getEntry('experience', id)))
+const relatedProjectEntries = (
+  await Promise.all(relatedProjects.map((id: string) => getEntry('projects', id)))
 ).filter(Boolean);
+
+const typeLabel: Record<string, string> = {
+  internship: 'Internship',
+  research: 'Research Position',
+  teaching: 'Teaching Role',
+  other: '',
+};
 ---
 
-<BaseLayout title={`${title} — Philip Smith`} description={description}>
+<BaseLayout title={`${title} at ${company} — Philip Smith`} description={description}>
   <article class="max-w-3xl mx-auto px-6 py-16">
 
-    <a href="/projects" class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-500 hover:text-accent dark:hover:text-accent-light transition-colors mb-10">
+    <a href="/experience" class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-500 hover:text-accent dark:hover:text-accent-light transition-colors mb-10">
       <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
       </svg>
-      All projects
+      All experience
     </a>
 
     <header class="mb-10">
       <div class="flex flex-wrap gap-2 mb-4">
+        {typeLabel[type] && (
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-medium">
+            {typeLabel[type]}
+          </span>
+        )}
         {tags.map(tag => (
           <span class="text-xs px-2.5 py-1 rounded-full bg-violet-100 dark:bg-violet-900/40 text-accent dark:text-accent-light font-medium">
             {tag}
           </span>
         ))}
-        {featured && (
-          <span class="text-xs px-2.5 py-1 rounded-full bg-accent/10 dark:bg-accent-light/10 text-accent dark:text-accent-light font-medium">
-            Featured
-          </span>
-        )}
       </div>
 
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
         {title}
       </h1>
-
-      <time class="text-sm text-gray-500 dark:text-gray-500">
-        {formatDateRange(startDate, endDate)}
-      </time>
+      <p class="text-lg text-accent dark:text-accent-light font-medium mb-1">{company}</p>
+      {location && <p class="text-sm text-gray-500 dark:text-gray-500 mb-1">{location}</p>}
+      <time class="text-sm text-gray-500 dark:text-gray-500">{formatDateRange(startDate, endDate)}</time>
 
       {(repoUrl || liveUrl) && (
         <div class="flex items-center gap-4 mt-4">
@@ -84,32 +90,32 @@ const relatedExperienceEntries = (
       <Content />
     </div>
 
-    {(relatedResearchEntries.length > 0 || relatedExperienceEntries.length > 0) && (
-      <aside class="mt-16 pt-10 border-t border-gray-200 dark:border-gray-800 space-y-8">
+    {(relatedResearchEntries.length > 0 || relatedProjectEntries.length > 0) && (
+      <aside class="mt-16 pt-10 border-t border-gray-200 dark:border-gray-800">
         {relatedResearchEntries.length > 0 && (
-          <div>
+          <div class="mb-8">
             <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">Related Research</h2>
             <ul class="space-y-3">
-              {relatedResearchEntries.map(entry => entry && (
+              {relatedResearchEntries.map(r => r && (
                 <li>
-                  <a href={`/research/${entry.id}`} class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors">
-                    <span class="font-medium text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors text-sm">{entry.data.title}</span>
-                    {entry.data.venue && <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">{entry.data.venue}</span>}
+                  <a href={`/research/${r.id}`} class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors">
+                    <span class="font-medium text-sm text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors">{r.data.title}</span>
+                    {r.data.venue && <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">{r.data.venue}</span>}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
         )}
-        {relatedExperienceEntries.length > 0 && (
+        {relatedProjectEntries.length > 0 && (
           <div>
-            <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">Related Experience</h2>
+            <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">Related Projects</h2>
             <ul class="space-y-3">
-              {relatedExperienceEntries.map(e => e && (
+              {relatedProjectEntries.map(p => p && (
                 <li>
-                  <a href={`/experience/${e.id}`} class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors">
-                    <span class="font-medium text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors text-sm">{e.data.title} · {e.data.company}</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">{formatDateRange(e.data.startDate, e.data.endDate)}</span>
+                  <a href={`/projects/${p.id}`} class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors">
+                    <span class="font-medium text-sm text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors">{p.data.title}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">{formatDateRange(p.data.startDate, p.data.endDate)}</span>
                   </a>
                 </li>
               ))}

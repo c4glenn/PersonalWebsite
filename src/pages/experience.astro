@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperienceEntry from '../components/ExperienceEntry.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('experience');
+const sorted = entries.sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
+---
+
+<BaseLayout title="Experience — Philip Smith" description="Work experience, research positions, and teaching roles.">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <div class="flex items-center justify-between mb-2">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Experience</h1>
+      <a
+        href="/cv.pdf"
+        download
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-accent dark:hover:border-accent-light hover:text-accent dark:hover:text-accent-light transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Download CV
+      </a>
+    </div>
+    <p class="text-gray-600 dark:text-gray-400 mb-12">
+      Internships, research positions, and teaching roles — in reverse chronological order.
+    </p>
+
+    <div>
+      {sorted.map(entry => <ExperienceEntry entry={entry} />)}
+    </div>
+  </div>
+</BaseLayout>

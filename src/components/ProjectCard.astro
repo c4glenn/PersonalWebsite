@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, startDate, endDate, tags, repoUrl, liveUrl, company, role, featured } = project.data;
+const { title, description, startDate, endDate, tags, repoUrl, liveUrl, featured } = project.data;
 ---
 
 <article
@@ -25,9 +25,6 @@ const { title, description, startDate, endDate, tags, repoUrl, liveUrl, company,
       <h3 class="font-semibold text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors">
         <a href={`/projects/${project.id}`} class="after:absolute after:inset-0">{title}</a>
       </h3>
-      {role && company && (
-        <p class="text-sm text-accent dark:text-accent-light mt-0.5">{role}</p>
-      )}
     </div>
     {featured && (
       <span class="shrink-0 text-xs px-2 py-0.5 rounded-full bg-accent/10 dark:bg-accent-light/10 text-accent dark:text-accent-light font-medium">

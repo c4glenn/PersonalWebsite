@@ -1,11 +1,14 @@
 ---
-title: "Research Assistant — WPI Automata Lab"
+title: "Research Assistant"
+company: "WPI Automata Lab"
+role: "Research Assistant"
+location: "Worcester, MA"
+type: "research"
 description: "Creating benchmarks to compare MILP solutions from literature to a novel SMT-based method for solving Multi-Agent CaTL (Capability Temporal Logic) encoded task specifications."
 startDate: "2025-10"
-company: "Worcester Polytechnic Institute"
-role: "Research Assistant"
-tags: ["Multi-Robot Systems", "SMT Solvers", "Task Allocation", "Python", "MILP"]
-featured: true
+tags: ["Multi-Robot Systems", "SMT Solvers", "Task Allocation", "Python", "MILP", "Formal Methods"]
+relatedResearch: []
+relatedProjects: []
 ---
 
 Working in the Automata Lab at WPI on formal methods for multi-robot task planning.

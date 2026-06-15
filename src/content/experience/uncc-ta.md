@@ -1,12 +1,15 @@
 ---
-title: "Teaching Assistant — UNC Charlotte CCI"
-description: "Supported Mobile Robotics, Intelligent Robotics, and Tangible Computing courses. Designed assignments, led lab sessions, and mentored undergraduate researchers. Implemented Docker-based reproducible lab environments."
-startDate: "2023-08"
-endDate: "2025-05"
+title: "Teaching Assistant"
 company: "UNC Charlotte, College of Computing and Informatics"
 role: "Teaching Assistant"
+location: "Charlotte, NC"
+type: "teaching"
+description: "Supported Mobile Robotics, Intelligent Robotics, and Tangible Computing courses. Designed assignments, led lab sessions, and implemented Docker-based reproducible lab environments."
+startDate: "2023-08"
+endDate: "2025-05"
 tags: ["ROS1", "ROS2", "Docker", "Teaching", "Robotics", "Linux"]
-featured: false
+relatedResearch: ["audio-themed-assignments"]
+relatedProjects: []
 ---
 
 Teaching assistant for robotics courses at UNC Charlotte's College of Computing and Informatics.

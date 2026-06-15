@@ -17,6 +17,10 @@ const { Content } = await render(entry);
 const relatedProjectEntries = (
   await Promise.all(entry.data.relatedProjects.map((id: string) => getEntry('projects', id)))
 ).filter(Boolean);
+
+const relatedExperienceEntries = (
+  await Promise.all(entry.data.relatedExperience.map((id: string) => getEntry('experience', id)))
+).filter(Boolean);
 ---
 
 <PostLayout
@@ -32,12 +36,8 @@ const relatedProjectEntries = (
       <svg class="w-5 h-5 text-accent dark:text-accent-light shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
       </svg>
-      <a
-        href={`/papers/${entry.data.paperFile}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-sm font-medium text-accent dark:text-accent-light hover:underline"
-      >
+      <a href={`/papers/${entry.data.paperFile}`} target="_blank" rel="noopener noreferrer"
+        class="text-sm font-medium text-accent dark:text-accent-light hover:underline">
         Download paper (PDF)
       </a>
     </div>
@@ -45,28 +45,38 @@ const relatedProjectEntries = (
 
   <Content />
 
-  {relatedProjectEntries.length > 0 && (
-    <aside class="not-prose mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">
-        Related Projects
-      </h2>
-      <ul class="space-y-3">
-        {relatedProjectEntries.map(p => p && (
-          <li>
-            <a
-              href={`/projects/${p.id}`}
-              class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors"
-            >
-              <span class="font-medium text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors text-sm">
-                {p.data.title}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
-                {formatDateRange(p.data.startDate, p.data.endDate)}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+  {(relatedProjectEntries.length > 0 || relatedExperienceEntries.length > 0) && (
+    <aside class="not-prose mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 space-y-8">
+      {relatedProjectEntries.length > 0 && (
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">Related Projects</h2>
+          <ul class="space-y-3">
+            {relatedProjectEntries.map(p => p && (
+              <li>
+                <a href={`/projects/${p.id}`} class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors">
+                  <span class="font-medium text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors text-sm">{p.data.title}</span>
+                  <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">{formatDateRange(p.data.startDate, p.data.endDate)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {relatedExperienceEntries.length > 0 && (
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">Related Experience</h2>
+          <ul class="space-y-3">
+            {relatedExperienceEntries.map(e => e && (
+              <li>
+                <a href={`/experience/${e.id}`} class="group flex flex-col p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-accent/50 dark:hover:border-accent-light/50 transition-colors">
+                  <span class="font-medium text-gray-900 dark:text-white group-hover:text-accent dark:group-hover:text-accent-light transition-colors text-sm">{e.data.title} · {e.data.company}</span>
+                  <span class="text-xs text-gray-500 dark:text-gray-500 mt-0.5">{formatDateRange(e.data.startDate, e.data.endDate)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </aside>
   )}
 </PostLayout>

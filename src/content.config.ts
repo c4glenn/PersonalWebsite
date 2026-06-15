@@ -12,11 +12,28 @@ const projects = defineCollection({
     tags: z.array(z.string()).default([]),
     repoUrl: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
-    company: z.string().optional(),
-    role: z.string().optional(),
     featured: z.boolean().default(false),
-    relatedProjects: z.array(z.string()).default([]),
     relatedResearch: z.array(z.string()).default([]),
+    relatedExperience: z.array(z.string()).default([]),
+  }),
+});
+
+const experience = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/experience' }),
+  schema: z.object({
+    title: z.string(),
+    company: z.string(),
+    role: z.string(),
+    location: z.string().optional(),
+    type: z.enum(['internship', 'research', 'teaching', 'other']).default('other'),
+    description: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+    repoUrl: z.string().url().optional(),
+    liveUrl: z.string().url().optional(),
+    relatedResearch: z.array(z.string()).default([]),
+    relatedProjects: z.array(z.string()).default([]),
   }),
 });
 
@@ -33,6 +50,7 @@ const research = defineCollection({
     venue: z.string().optional(),
     authors: z.array(z.string()).default([]),
     relatedProjects: z.array(z.string()).default([]),
+    relatedExperience: z.array(z.string()).default([]),
   }),
 });
 
@@ -47,4 +65,4 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { projects, research, blog };
+export const collections = { projects, experience, research, blog };
