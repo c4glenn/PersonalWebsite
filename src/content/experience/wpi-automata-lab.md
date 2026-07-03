@@ -7,7 +7,7 @@ type: "research"
 description: "Creating benchmarks to compare MILP solutions from literature to a novel SMT-based method for solving Multi-Agent CaTL (Capability Temporal Logic) encoded task specifications."
 startDate: "2025-10"
 tags: ["Multi-Robot Systems", "SMT Solvers", "Task Allocation", "Python", "MILP", "Formal Methods"]
-relatedResearch: []
+relatedResearch: ["robustness-based-synthesis-for-twtl-via-milp"]
 relatedProjects: []
 ---
 
